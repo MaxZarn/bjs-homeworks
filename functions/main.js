@@ -47,53 +47,69 @@ showSolutionsMessage(1,2,3)
 //Задание 2:
 
 function getPersonData(secretData) {
-  if (secretData.aaa === 0 && secretData.bbb === 0) {
-    return secretData = {firstName: "Родриго", lastName: "Родриго"};
-  } else if (secretData.aaa === 1 && secretData.bbb === 1) {
-    return secretData = {firstName: "Эмильо", lastName: "Эмильо"};
-  } else if (secretData.aaa === 0 && secretData.bbb === 1) {
-    return secretData = {firstName: "Родриго", lastName: "Эмильо"};
-  } else if (secretData.aaa === 1 && secretData.bbb === 0) {
-    return secretData = {firstName: "Эмильо", lastName: "Родриго"};
-  } 
-}
-
-
-console.log(getPersonData({aaa: 0, bbb: 0}));
-console.log(getPersonData({aaa: 1, bbb: 1}));
-console.log(getPersonData({aaa: 0, bbb: 1}));
-console.log(getPersonData({aaa: 1, bbb: 0}));
+    return {
+      firstName: secret(secretData.aaa),
+      lastName: secret(secretData.bbb)
+    };
+ }
+ 
+ function secret(x) {
+   return x === 0 ? 'Родриго' : 'Эмильо';
+ }
+ 
+ console.log(getPersonData({aaa: 0, bbb: 0}));
+ console.log(getPersonData({aaa: 1, bbb: 1}));
+ console.log(getPersonData({aaa: 0, bbb: 1}));
+ console.log(getPersonData({aaa: 1, bbb: 0}));
 
 
 //Задание 3:
 
-function getAverageScore(data) {
-    let allAverage = 0; //сумма средних оценок по всем предметам
-    let objectLenght = 0; //длина объекта data
-
-    for (let prop in data) {  // Обход свойств
-        let value = data[prop];
-        let sumResult = 0; // сумма оценок по предмету
-        for (let i = 0; value.length > i; i++) { //цикл для заполнения переменной c суммой оценок по предмету 
-            sumResult += value[i];
-        }
-        data[prop] = sumResult / value.length; //средняя оценка по предмету
-        allAverage += data[prop];
-        objectLenght++;
-        data.average = allAverage / objectLenght; // добавление в объект средней оценки за все предметы
+function averageScore(x) {
+    let total = 0; // сумма оценок по предмету
+    for (let i = 0; x.length > i; i++) { //цикл для заполнения переменной c суммой оценок по предмету 
+      total += x[i];
     }
-    return data;
-}
-
-console.log(getAverageScore({
-    algebra: [2,4,5,2,3,4],
-    geometry: [2,4,5],
-    russian: [3,3,4,5],
-    physics: [5,5],
-    music: [2,2,6],
-    english: [4,4,3],
-    poetry: [5,3,4],
-    chemistry: [2],
-    french: [4,4],
-    
-  }));
+    return total / x.length; // возвращает среднее значение массива
+  }
+  
+  
+  function getAverageScore(data) {
+      let allAverage = 0; //сумма средних оценок по всем предметам
+      let objectLength = 0; //длина объекта data
+  
+      let arrAverage = {
+        algebra: averageScore(data.algebra),
+        geometry: averageScore(data.geometry),
+        russian: averageScore(data.russian),
+        physics: averageScore(data.physics),
+        music: averageScore(data.music),
+        english: averageScore(data.english),
+        poetry: averageScore(data.poetry),
+        chemistry: averageScore(data.chemistry),
+        french: averageScore(data.french),
+      };
+      for (let prop in arrAverage) {  // Обход свойств
+          let value = arrAverage[prop];
+          allAverage += arrAverage[prop];
+          objectLength++;
+      arrAverage.average = allAverage / objectLength;
+      }
+      return arrAverage;
+  }
+  
+  
+  
+  
+  console.log(getAverageScore({
+      algebra: [2,4,5,2,3,4],
+      geometry: [2,4,5],
+      russian: [3,3,4,5],
+      physics: [5,5],
+      music: [2,2,6],
+      english: [4,4,3],
+      poetry: [5,3,4],
+      chemistry: [2],
+      french: [4,4],
+      
+    }));
