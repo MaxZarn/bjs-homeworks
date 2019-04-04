@@ -78,28 +78,15 @@ function averageScore(x) {
       let allAverage = 0; //сумма средних оценок по всем предметам
       let objectLength = 0; //длина объекта data
   
-      let arrAverage = {
-        algebra: averageScore(data.algebra),
-        geometry: averageScore(data.geometry),
-        russian: averageScore(data.russian),
-        physics: averageScore(data.physics),
-        music: averageScore(data.music),
-        english: averageScore(data.english),
-        poetry: averageScore(data.poetry),
-        chemistry: averageScore(data.chemistry),
-        french: averageScore(data.french),
-      };
+      let arrAverage = data;
       for (let prop in arrAverage) {  // Обход свойств
-          let value = arrAverage[prop];
+          arrAverage[prop] = averageScore(arrAverage[prop]); 
           allAverage += arrAverage[prop];
           objectLength++;
       arrAverage.average = allAverage / objectLength;
       }
       return arrAverage;
   }
-  
-  
-  
   
   console.log(getAverageScore({
       algebra: [2,4,5,2,3,4],
@@ -111,5 +98,4 @@ function averageScore(x) {
       poetry: [5,3,4],
       chemistry: [2],
       french: [4,4],
-      
     }));
