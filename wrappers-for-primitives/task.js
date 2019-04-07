@@ -12,7 +12,7 @@ function calculateMortgage() {
 }
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
-    //let date = new Object();
+    let date = new Object();
     let arr = {
         percent: percent,
         contribution: contribution,
@@ -34,9 +34,9 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     let years = date.getFullYear() - start.getFullYear();
     let months = date.getMonth() - start.getMonth();
     let n = years * 12 + months;
-    let sumPerMonth = arr.amount * (arr.percent / 12 + arr.percent / 12/(((1+arr.percent / 12)**n) - 1));
+    let sumPerMonth = arr.amount * (arr.percent / 12 + arr.percent / 12 / (((1+arr.percent / 12)**n) - 1));
     let totalAmount = arr.amount - arr.contribution + sumPerMonth;// Общая Сумма которую придется заплатить клиенту
-    return totalAmount = arr.amount - arr.contribution + sumPerMonth;
+    return arr.amount - arr.contribution + sumPerMonth;
 }
 
 function sayHello() {
@@ -50,11 +50,11 @@ function getGreeting(name) {
     // код для задачи №2 писать здесь
     
     if (name === null || name === undefined || name === '') {
-        name = new String('Аноним');
-        alert(`Привет, мир! Меня зовут ${name}.`);
+        name = 'Аноним';
+        return alert(`Привет, мир! Меня зовут ${name}.`),
         console.log(`Привет, мир! Меня зовут ${name}.`);
     } else {
-        alert(`Привет, мир! Меня зовут ${name}.`);
+        return alert(`Привет, мир! Меня зовут ${name}.`),
         console.log(`Привет, мир! Меня зовут ${name}.`);
     } 
 }
