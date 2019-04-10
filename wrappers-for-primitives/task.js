@@ -12,29 +12,29 @@ function calculateMortgage() {
 }
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
-    let date = new Object();
+    date = new Object();
     let arr = {
-        percent: percent,
+        percent: percent / 100,
         contribution: contribution,
         amount: amount,
     };
     // проверка на корректность введенных данных
-    for (let prop in arr) {
-        let value = arr[prop];
-    if (isNan(value) === true) {
-       return parseInt(value);
-    } else if (!isNan(value) === true) {
-        return value;
-    } else {
-        return `Пераметр ${prop} содержит неправильное значение ${value}.`;
+        for (let prop in arr) {
+           let value = arr[prop];
+           if (typeof value == Number) {
+          return value;
+        } else if (typeof value  == NaN) {
+            return parseInt(value);
+        } else {
+            return `Пераметр ${prop} содержит неправильное значение ${value}.`;
+        }
     }
-}
     //let P = arr.percent / 12; // 1/12 процентной ставки
     let start = new Date();
     let years = date.getFullYear() - start.getFullYear();
     let months = date.getMonth() - start.getMonth();
     let n = years * 12 + months;
-    let sumPerMonth = arr.amount * (arr.percent / 12 + arr.percent / 12 / (((1+arr.percent / 12)**n) - 1));
+    let sumPerMonth = arr.amount * (arr.percent / 12 + (arr.percent / 12) / (((1+arr.percent / 12)**n) - 1));
     let totalAmount = arr.amount - arr.contribution + sumPerMonth;// Общая Сумма которую придется заплатить клиенту
     return arr.amount - arr.contribution + sumPerMonth;
 }
@@ -51,10 +51,10 @@ function getGreeting(name) {
     
     if (name === null || name === undefined || name === '') {
         name = 'Аноним';
-        return alert(`Привет, мир! Меня зовут ${name}.`),
         console.log(`Привет, мир! Меня зовут ${name}.`);
+        return `Привет, мир! Меня зовут ${name}.`;
     } else {
-        return alert(`Привет, мир! Меня зовут ${name}.`),
         console.log(`Привет, мир! Меня зовут ${name}.`);
+        return `Привет, мир! Меня зовут ${name}.`;
     } 
 }
