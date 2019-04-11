@@ -73,7 +73,7 @@ class Arm {
         }
 }
 
-class Bow extends Weapon {
+class Bow {
     constructor() {
         this.name = 'Лук',
         this.attack = 10,
@@ -82,7 +82,7 @@ class Bow extends Weapon {
         }
 }
 
-class Sword extends Weapon {
+class Sword {
     constructor() {
         this.name = 'Меч',
         this.attack = 25,
@@ -91,7 +91,7 @@ class Sword extends Weapon {
         }
 }
 
-class Knife extends Weapon {
+class Knife {
     constructor() {
         this.name = 'Нож',
         this.attack = 5,
@@ -100,7 +100,7 @@ class Knife extends Weapon {
         }
 }
 
-class Staff extends Weapon {
+class Staff {
 constructor() {
     this.name = 'Посох',
     this.attack = 8,
@@ -114,6 +114,8 @@ const bow = new Bow();
 const sword = new Sword();
 const knife = new Knife();
 const staff = new Staff();
+
+// Задание №3:
 
 
 
