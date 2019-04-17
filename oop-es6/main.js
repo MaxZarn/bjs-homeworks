@@ -2,28 +2,30 @@
 
 //Задание №1:
 class Weapon {
-    constructor(name, attack, durability, range) {
+    constructor(name, attack, initDurability, range, currentDurability) {
     this.name = name;
-    this.attack = attack;
-    this.durability = durability;
+    this.attack = attack; // урон оружия
+    this.currentDurability = currentDurability; // текущая прочность оружия
     this.range = range;
+    this.initDurability = initDurability;  // начальная прочность оружия
     }
 
     takeDamage(damage) {
-        this.durabilityAfterHit = this.durability - damage; // прочность после нанесения урона
-        if (this.durabilityAfterHit < 0) {
-            this.durabilityAfterHit = 0;
-            return this.durabilityAfterHit;
+        this.currentDurability = this.initDurability - damage; // прочность после нанесения урона
+        
+        if (this.currentDurability < 0) {
+            this.currentDurability = 0;
+            return this.currentDurability;
         } else {
-            return this.durabilityAfterHit;
+            return this.currentDurability;
         }
     }
 
     getDamage() { 
-        if (this.durabilityAfterHit === 0) {
+        if (this.currentDurability === 0) {
             return 0;
         }
-        else if ((this.durabilityAfterHit / this.durability) * 100 >= 30) {
+        else if ((this.currentDurability / this.initDurability) * 100 >= 30) {
             return this.attack;
         } else {
             return this.attack / 2;
@@ -31,26 +33,22 @@ class Weapon {
     }
 
     isBroken() {
-        return this.durabilityAfterHit > 0 ? false : true;
+        return this.currentDurability === 0;
       }
     
 }
 
 /*
-const arm = new Weapon('Рука', 1, Infinity, 1,);
+const arm = new Weapon('Рука', 1, Infinity, 1);
 const bow = new Weapon('Лук', 10, 200, 3);
 const sword = new Weapon('Меч', 25, 500, 1);
 const knife = new Weapon('Нож', 5, 300, 1);
 const staff = new Weapon('Посох', 8, 300, 2);
-
-
-const longBow = new Weapon('Длинный лук', 15, bow.durability, 4);
+const longBow = new Weapon('Длинный лук', 15, bow.initDurability, 4);
 const axe = new Weapon('Секира', 27, 800, sword.range);
-const stormStaff = new Weapon('Посох бури', 10, staff.durability, 3);
-
-
+const stormStaff = new Weapon('Посох бури', 10, staff.initDurability, 3);
 longBow.takeDamage(195);
-console.log(longBow.durabilityAfterHit);
+console.log(longBow.currentDurability);
 console.log(longBow.getDamage());
 console.log(longBow.isBroken());  
 */
@@ -60,7 +58,7 @@ console.log(longBow.isBroken());
 class Arm extends Weapon {
      name = 'Рука';
      attack = 1;
-     durability = Infinity;
+     initDurability = Infinity;
      range = 1;
     
 }
@@ -68,42 +66,41 @@ class Arm extends Weapon {
 class Bow extends Weapon {
      name = 'Лук';
      attack = 10;
-     durability = 200;
+     initDurability = 200;
      range = 3;
 }
 
 class Sword extends Weapon {
     name = 'Меч';
     attack = 25;
-    durability = 500;
+    initDurability = 500;
     range = 1;
 }
 
 class Knife extends Weapon {
      name = 'Нож';
      attack = 5;
-     durability = 300;
+     initDurability = 300;
      range = 1;
 }
 
 class Staff extends Weapon {
      name = 'Посох';
      attack = 8;
-     durability = 300;
+     initDurability = 300;
      range = 2;
 }
 
 class LongBow extends Bow {
      name = 'Длинный Лук';
      attack = 15;
-     //durability = bow.durability;
      range = 4;
 }
 
 class Axe extends Sword {
      name = 'Секира';
      attack = 27;
-     durability = 800;
+     currentDurability = 800;
 }
 
 class StormStaff extends Staff {
@@ -123,7 +120,7 @@ const axe = new Axe();
 const stormStaff = new StormStaff();
 
 longBow.takeDamage(190);
-console.log(longBow.durabilityAfterHit);
+console.log(longBow.currentDurability);
 console.log(longBow.getDamage());
 console.log(longBow.isBroken()); 
 console.log(longBow.name);
