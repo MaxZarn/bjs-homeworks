@@ -24,9 +24,9 @@ function setDailyRhythm(wakeUpTime, bedTime) {
     const goodNight = () => alert('Спокойной ночи, Вася!');
     const goodMorning = () => alert('Доброе утро, Вася!');
     
-    const checkTimeWakeUp = setAlarm(wakeUpTime, goodMorning);
-    const checkTimeToSleep = setAlarm(bedTime, goodNight);
+    const checkWakeUpTime = setAlarm(wakeUpTime, goodMorning);
+    const checkSleepTime = setAlarm(bedTime, goodNight);
 
-    setInterval(checkTimeWakeUp, 10000);
-    setInterval(checkTimeToSleep, 10000);
+    setInterval(checkWakeUpTime, 1000);
+    setInterval(checkSleepTime, 1000);
 }
