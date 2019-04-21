@@ -1,33 +1,31 @@
 "use strict"
 
 function compareArrays(arr1, arr2) { //вспомогательная функция которая сравнивает значения двух массивов
-    if (arr1.length === arr2.length && equal(arr1) == equal(arr2)) {
-        return true;
-    } else {
-        return false;
-    }
+  return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]); 
 }
 
-function equal(arr) {
-    return arr.join('');
-}
+
+
 
 function memoize(fn, limit) {
-    const results = [{args: '', result: ''}]
-    
-    if (results.find()) {
+    const results = []; //массив памяти
 
+    return function() {  
+    const args = Array.from(arguments);
+    let result;
+
+    const search = results.find(someNumbers => compareArrays(someNumbers.args, args));
+    if(search) {
+      result = search.result;
+    } else {
+      result = fn(args);
     }
-}
-
-const fn = function() {
-  let arg = Array.from(arguments).join(', ');
-  let res;
-  for (var i = 0; i < arguments.length; i++) {
-    res = res + arguments[i];
+    if (results.length >= limit) {
+     results.shift();
+    }
   }
-  return results.args.push(arg), results.result.push(res); 
 }
 
-const mFn = memoize(fn, 2);
-mFn(1,1);
+const fn = (a, b) => a + b; 
+
+const mFn = memoize(fn, 10);
