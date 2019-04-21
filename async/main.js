@@ -3,17 +3,23 @@
 function setAlarm(time, callback) {
     return function () {
         const timeNow = new Date();
-        const hours = timeNow.getHours().toString();
+        const hours = timeNow.getHours().toString(); 
         const minutes = timeNow.getMinutes().toString();
         let resultTime = "";
         
-      if (minutes.length < 2) {
+      if (minutes.length < 2) {  // если менут меньше 10, то добавляем 0
            resultTime = hours + ":" + 0 + minutes;
         }  else if (minutes.length >= 2) {
            resultTime = hours + ":" + minutes;
-        } 
+        }
+        
+        if (hours.length < 2) {
+            resultTime = 0 + hours + ":" + minutes;
+        } else if (hours.length >= 2) {
+            resultTime = hours + ":" + minutes;
+        }
 
-        if (resultTime === time) {
+        if (resultTime === time) {  // если текущее время совпадает с выставленным, возвращаем callback функцию
             callback();
         }
     }
@@ -30,3 +36,4 @@ function setDailyRhythm(wakeUpTime, bedTime) {
     setInterval(checkWakeUpTime, 1000);
     setInterval(checkSleepTime, 1000);
 }
+
