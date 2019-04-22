@@ -19,6 +19,8 @@ function memoize(fn, limit) {
       result = search.result;
     } else {
       result = fn(args);
+      results.push(result);
+      results.push(args);
     }
     if (results.length >= limit) {
      results.shift();
@@ -26,6 +28,6 @@ function memoize(fn, limit) {
   }
 }
 
-const fn = (a, b) => a + b; 
+const fn = (a, b, ...rest) => rest.map(function(element) {return a + b + element}); 
 
 const mFn = memoize(fn, 10);
